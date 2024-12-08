@@ -18,16 +18,18 @@ def chercher_friend(gamerName, vraiNom, gamerTag):
         print(f"Nom du joueur: {data['gameName']}")
         print(f"ID du joueur: {data['puuid']}")
         print(f"Tag: {data['tagLine']}")
+        data = response.json()
+        print(data)
+        reponse = {
+            "puuid": data['puuid'],
+            "gameName": gamerName,
+            "tagLine": gamerTag,
+            "realName": vraiNom
+        }
     else:
         print(f"Erreur lors de la requête: {response.status_code}")
-    data = response.json()
-    print(data)
-    reponse = {
-        "puuid" : data['puuid'],
-        "gameName" : gamerName,
-        "tagLine" : gamerTag,
-         "realName" : vraiNom
-    }
+        return response.status_code
+
     return reponse
 
 def chercher_friend_lvl(vraiNom):
@@ -39,12 +41,13 @@ def chercher_friend_lvl(vraiNom):
     # Vérifier si la requête a réussi (code de statut 200)
     if response.status_code == 200:
         data = response.json()  # Récupérer les données de la réponse au format JSON
+        data = response.json()
+        print(data)
+        reponse = {
+            "summonerId": data['id'],
+            "summonerLevel": data['summonerLevel']
+        }
     else:
         print(f"Erreur lors de la requête: {response.status_code}")
-    data = response.json()
-    print(data)
-    reponse = {
-        "summonerId" : data['id'],
-        "summonerLevel" : data['summonerLevel']
-    }
+        return response.status_code
     return reponse
