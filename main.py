@@ -66,7 +66,7 @@ df = pd.read_sql_query(query, conn)
 print(df)
 
 
-query = "SELECT Friends.realName, soloqRank,soloqRatio, summonerLevel FROM BasicsPlayer JOIN Friends ON BasicsPlayer.realName = Friends.realName;"
+query = "SELECT Friends.realName, Friends.puuid, soloqRank,soloqRatio, summonerLevel FROM BasicsPlayer JOIN Friends ON BasicsPlayer.realName = Friends.realName;"
 
 # Charger les données dans un DataFrame Pandas
 df = pd.read_sql_query(query, conn)
@@ -74,7 +74,7 @@ df = pd.read_sql_query(query, conn)
 # Afficher le DataFrame (table)
 print(df)
 
-query = "SELECT AVG(CASE WHEN gold != 0 THEN damagePerMinute / goldPerMinute ELSE 0 END) AS damagepergold, realName FROM AdvancedPlayer GROUP BY realName ORDER BY damagepergold DESC;"
+query = "SELECT AVG(CASE WHEN gold != 0 THEN damagePerMinute / goldPerMinute ELSE 0 END) AS damagepergold, realName, puiid FROM AdvancedPlayer GROUP BY realName ORDER BY damagepergold DESC;"
 rows = cursor.execute(query)
 # Charger les données dans un DataFrame Pandas
 df2 = pd.read_sql_query(query, conn)
