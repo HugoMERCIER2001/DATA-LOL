@@ -12,7 +12,9 @@ def initialize_database():
             puuid TEXT PRIMARY KEY,
             gameName TEXT,
             tagLine TEXT,
-            realName TEXT DEFAULT "Inconnu" 
+            realName TEXT DEFAULT "Inconnu",
+            summonerId TEXT,
+            summonerLevel INT
                 )
     """)
     conn.commit()  # Sauvegarde les modifications
@@ -61,7 +63,7 @@ def initialise_database_basics_player():
     conn.commit()  # Sauvegarde les modifications
     conn.close()
 
-def initialise_database_basics_player():
+def initialise_database_advanced_player():
     conn = sqlite3.connect("Riot_Database.db")  # Crée ou ouvre le fichier de la base de données
     cursor = conn.cursor()
     
@@ -98,13 +100,15 @@ def initialise_database_basics_player():
 def save_to_database(playerData): #player_data doit être une liste qui contient la clé "id", la clé "name", la clé "summonerLevel"
     conn = sqlite3.connect("riot_database.db")
     cursor = conn.cursor()
-    
-    # Insérer ou remplacer les données d'un joueur
-    cursor.execute("""
-        INSERT OR REPLACE INTO friends (puuid, gameName, tagLine, realName)
-        VALUES (?, ?, ?, ?)
-    """, (playerData["puuid"], playerData["gameName"], playerData["tagLine"], playerData["realName"]))
-    
+
+    if type(playerData) != int:
+
+        # Insérer ou remplacer les données d'un joueur
+        cursor.execute("""
+            INSERT OR REPLACE INTO friends (puuid, gameName, tagLine, realName)
+            VALUES (?, ?, ?, ?)
+        """, (playerData["puuid"], playerData["gameName"], playerData["tagLine"], playerData["realName"]))
+
     conn.commit()  # Sauvegarde les modifications
     conn.close()
 
@@ -188,9 +192,9 @@ def supprimer_ligne(db_name, table_name, condition):
 
 import sqlite3
 
-def ajouter_colonne(db_name, table_name, colonne_name, colonne_type, valeur_par_defaut=None):
+def ajouter_colonne(db_name, table_name, colonne_name, colonne_type, valeur_par_defaut = None):
     try:
-        # Se connecter à la base de données
+        # Se connecter à la base de donnée
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
 

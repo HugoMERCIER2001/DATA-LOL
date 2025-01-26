@@ -118,11 +118,11 @@ def cherche_stat_basics_player(summonerId):
             reponse = {
                 "date" : date_header,
                 "summonerId" : summonerId,
-                "flexRank" : f"{data[i]["tier"]}" + f" {data[i]["rank"]}",
+                "flexRank" : f"{data[i]['tier']}" + f" {data[i]['rank']}",
                 "flexLeaguePoint" : data[i]['leaguePoints'],
                 "flexNbrWins" : data[i]['wins'],
                 "flexNbrLosses" : data[i]['losses'],
-                "soloqRank" : f"{data[j]["tier"]}" + f" {data[j]["rank"]}",
+                "soloqRank" : f"{data[j]['tier']}" + f" {data[j]['rank']}",
                 "soloqLeaguePoint" : data[j]['leaguePoints'],
                 "soloqNbrWins" : data[j]['wins'],
                 "soloqNbrLosses" : data[j]['losses']
